@@ -8,95 +8,75 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
   <body>
-    <div
-      style="
-        width: 700px;
-        background-color: white;
-        margin: 50px auto;
-        padding: 20px;
-        border-radius: 5px;
-      "
-    >
-      <h1>Hi Welcome to my hut</h1>
-      <p style="text-align: justify;">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-        exercitationem assumenda voluptate doloremque, quis quidem iure
-        excepturi molestiae, eos numquam provident asperiores necessitatibus
-        blanditiis aliquam voluptatum. Tempora inventore facilis distinctio quo
-        doloribus unde soluta nesciunt fugit mollitia qui? Excepturi eum iste
-        perspiciatis veniam?
-      </p>
-      <a
-        style="
-          background-color: #070606;
-          border-radius: 20px;
-          color: white;
-          padding: 6px 12px;
-          text-decoration: none;
-        "
-        href="https://github.com/VindoKountur"
-      >
-        contact
-      </a>
-      <div style="margin-top: 20px">
-        <button
-          style="background-color: transparent; border: 0; cursor: pointer"
-        >
-          Dowload CV
-          <i class="fa-solid fa-download"></i>
-        </button>
+    <nav>
+      <div class="left-side">
+        <img src="/assets/images/logo.png" alt="logo" />
+        <ul>
+          <li>
+            <a class="active" href="/">Home</a>
+          </li>
+          <li>
+            <a href="/contactme.html">My Project</a>
+          </li>
+        </ul>
       </div>
-      <div style="text-align: center">
-        <a href="https://www.linkedin.com/" style="text-decoration: none;">
-          <i style="padding: 5px; color: #070606;" class="fa-brands fa-xl fa-linkedin"></i>
-        </a>
-        <a href="https://www.instagram.com/" style="text-decoration: none;">
-          <i
-            style="padding: 5px; color: #070606;"
-            class="fa-brands fa-xl fa-square-instagram"
-          ></i>
-        </a>
-        <a href="https://id-id.facebook.com/" style="text-decoration: none;">
-          <i style="padding: 5px; color: #070606;" class="fa-brands fa-xl fa-facebook"></i>
-        </a>
-        <a href="https://twitter.com/" style="text-decoration: none;">
-          <i style="padding: 5px; color: #070606;" class="fa-brands fa-xl fa-square-twitter"></i>
-        </a>
+      <div class="right-side">
+        <a href="/contactme.html">Contact Me</a>
       </div>
-      <div
-        style="
-          margin: 20px auto;
-          text-align: center;
-          width: 270px;
-          box-shadow: 0 4px 8px 0 #c0c0c0, 0 6px 20px 0 #c0c0c0;
-          border-radius: 10px;
-        "
-      >
-        <img
-          src="/assets/images/foto.jpg"
-          width="100%"
-          height="350"
-          alt="man"
-          style="border-top-left-radius: 10px; border-top-right-radius: 10px"
-        />
-        <p
-          style="margin: 0; margin-top: 10px; font-size: 20px; font-weight: 800"
-        >
-          Lifeindo Kountur
-        </p>
-        <p
-          style="
-            margin: 0;
-            padding-bottom: 10px;
-            font-size: 14px;
-            font-weight: 600;
-          "
-        >
-          Fullstack Developer
-        </p>
+    </nav>
+    <section>
+      <div class="content">
+        <div class="left-content">
+          <h1>Hi Welcome to my hut</h1>
+          <p style="text-align: justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit,
+            maiores ab aliquam porro magni ratione praesentium officia aliquid
+            hic commodi, fuga iusto? Consequuntur facilis praesentium nostrum
+            repellat minima eum reiciendis nam, quos quidem, obcaecati
+            reprehenderit illum cumque asperiores, aliquid quia! Laborum
+            molestiae officia ipsam impedit quis, tenetur explicabo nulla
+            voluptatem.
+          </p>
+          <div class="contact-cv-container">
+            <a class="contact" href="https://github.com/VindoKountur">
+              contact
+            </a>
+            <div>
+              <a class="cv" href="#">
+                Dowload CV
+                <i class="fa-solid fa-download"></i>
+              </a>
+            </div>
+          </div>
+          <div style="margin-top: 50px">
+            <a href="https://www.linkedin.com/" style="text-decoration: none">
+              <i class="fa-brands fa-2xl fa-linkedin icon-style"></i>
+            </a>
+            <a href="https://www.instagram.com/" style="text-decoration: none">
+              <i class="fa-brands fa-2xl icon-style fa-square-instagram"></i>
+            </a>
+            <a href="https://id-id.facebook.com/" style="text-decoration: none">
+              <i class="fa-brands fa-2xl icon-style fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com/" style="text-decoration: none">
+              <i class="fa-brands fa-2xl icon-style fa-square-twitter"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="/assets/images/foto.jpg"
+            width="100%"
+            alt="man"
+            style="border-top-left-radius: 10px; border-top-right-radius: 10px"
+          />
+          <p>Lifeindo Kountur</p>
+          <p style="font-size: 15px;">Fullstack Developer</p>
+        </div>
       </div>
-    </div>
+    </section>
   </body>
 </html>
