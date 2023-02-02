@@ -216,8 +216,9 @@ section {
 
 .project-list-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: max-content max-content max-content;
   gap: 30px;
+  justify-content: center;
 }
 
 .project-card {
