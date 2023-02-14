@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>{{.Data.Title}}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-300">
+    <nav
+      class="flex justify-between items-center bg-gray-200 py-3 px-4 lg:px-10"
+    >
+      <div class="flex items-center">
+        <img src="/public/images/logo.png" alt="logo" />
+        <ul class="flex ml-7 gap-3 lg:gap-7">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          {{ if .Data.IsLogin }}
+            <li>
+              <a class="text-orange-600 font-extrabold" href="/myproject">Add Project</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="flex items-center gap-10 justify-around">
+        {{ if .Data.IsLogin }}
+          <p>Hello, {{ .Data.Name }}</p>
+          <a href="/logout" class="hover:scale-105 hover:font-semibold"
+            >Logout</a
+          >
+          {{ else }}
+          <a href="/register" class="hover:scale-105 hover:font-semibold"
+            >Register</a
+          >
+          <a href="/login" class="hover:scale-105 hover:font-semibold"
+            >Login</a
+          >
+        {{ end }}
+        <a href="/contactme" class="bg-black text-white p-2 rounded-md"
+          >Contact Me</a
+        >
+      </div>
+    </nav>
+    <div class="p-6">
+      <h1 class="text-center text-3xl font-bold">EDIT PROJECT</h1>
+      <form class="mt-6 flex flex-col md:w-2/3 mx-auto lg:w-1/3" action="/updateproject" method="post" enctype="multipart/form-data">
+        <!-- HIDDEN INPUT ID -->
+        <input type="hidden" name="id" value="{{.EditProject.Id}}">
+        <label class="font-semibold" for="name">Project Name</label>
+        <input class="p-2 rounded mb-5 drop-shadow-lg" type="text" name="projectName" id="projectName" value="{{.EditProject.Name}}" />
+        <div class="flex justify-between gap-5 w-full">
+          <div class="w-full">
+            <label class="font-semibold" for="name">Start Date</label>
+            <input class="w-full p-2 rounded mb-5 drop-shadow-lg" type="date" name="startDate" id="startDate" value="{{.EditProject.StartDateFormat}}" />
+          </div>
+          <div class="w-full">
+            <label class="font-semibold" for="name">End Date</label>
+            <input class="w-full p-2 rounded mb-5 drop-shadow-lg" type="date" name="endDate" id="endDate" value="{{.EditProject.EndDateFormat}}" />
+          </div>
+        </div>
+        <label class="font-semibold" for="description">Description</label>
+        <textarea
+        class="p-2 rounded mb-5 drop-shadow-lg resize-none"
+          name="description"
+          id="description"
+          cols="30"
+          rows="6"
+        >{{.EditProject.Description}}</textarea>
+        <label class="font-semibold" for="technologies">Technologies</label>
+        <div class="grid grid-cols-2 mb-5">
+          <div>
+            <input type="checkbox" name="node" id="node" value="node" 
+              {{ if .TechUsed.Node }}
+                checked
+              {{ end }}
+            />
+            <label class="ml-1" for="node">Node JS</label>
+          </div>
+          <div>
+            <input type="checkbox" name="vuejs" id="vuejs" value="vuejs" 
+            {{ if .TechUsed.Vuejs }}
+              checked
+            {{ end }}
+            />
+            <label class="ml-1" for="vuejs">Vue JS</label>
+          </div>
+          <div>
+            <input type="checkbox" name="react" id="react" value="react"
+            {{ if .TechUsed.React }}
+              checked
+            {{ end }}
+            />
+            <label class="ml-1" for="react">React JS</label>
+          </div>
+          <div>
+            <input type="checkbox" name="php" id="php" value="php" 
+            {{ if .TechUsed.Php }}
+              checked
+            {{ end }}
+            />
+            <label class="ml-1" for="php">PHP</label>
+          </div>
+        </div>
+        <label class="flex justify-between mb-5 rounded-l-lg items-center bg-white rounded" for="uploadImage" class="choose-file">
+          <p class="bg-gray-500 py-2 px-4 text-white rounded-l-lg">choose</p>
+          <i class="pr-4 fa-solid fa-paperclip"></i>
+        </label>
+        <input type="file" name="uploadImage" id="uploadImage" hidden />
+        <div class="flex justify-end">
+          <button class="bg-black text-white rounded-2xl px-5 py-1.5">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="/public/js/script.js"></script>
+</html>

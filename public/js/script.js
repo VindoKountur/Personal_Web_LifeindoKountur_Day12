@@ -1,5 +1,3 @@
-document.title = "Task Day 5 - My Profile Page";
-
 // Contact
 function getValues() {
   let name = document.querySelector("#name").value;
@@ -43,24 +41,13 @@ function getProjectData(e) {
   let php = document.querySelector("#php").checked;
   let uploadImage = document.querySelector("#uploadImage").files;
 
-  if (projectName == "") {
-    return alert("Nama Project harus diisi");
-  }
-  if (startDate == "") {
-    return alert("Start Date harus diisi");
-  }
-  if (endDate == "") {
-    return alert("End Date harus diisi");
-  }
-  if (description == "") {
-    return alert("Description belum diisi");
-  }
-  if (!nodejs && !vuejs && !reactjs && !php) {
+  if (projectName == "") return alert("Nama Project harus diisi");
+  if (startDate == "") return alert("Start Date harus diisi");
+  if (endDate == "") return alert("End Date harus diisi");
+  if (description == "") return alert("Description belum diisi");
+  if (!nodejs && !vuejs && !reactjs && !php)
     return alert("Technologi belum dipilih");
-  }
-  if (uploadImage.length == 0) {
-    return alert("Image belum dipilih");
-  }
+  if (uploadImage.length == 0) return alert("Image belum dipilih");
 
   uploadImage = URL.createObjectURL(uploadImage[0]);
 
@@ -79,51 +66,49 @@ function getProjectData(e) {
   };
 
   projectList.push(projectData);
-  console.log(projectList);
   showProjectList();
 }
 
 function showProjectList() {
-  let showProject = document.querySelector(".project-list-container");
+  let showProject = document.querySelector("#project-list-container");
   showProject.innerHTML = "";
 
   if (projectList.length == 0) {
-    showProject.innerHTML = `<p class='empty'>Its empty here<p>`;
+    showProject.innerHTML = `<p class='text-center md:col-span-2 lg:col-span-3'>Its empty here<p>`;
     return;
   }
   for (let i = 0; i < projectList.length; i++) {
     const project = projectList[i];
     showProject.innerHTML += `
-        <div class="project-card">
-        <img src="${project.uploadImage}" alt="project-image" />
-        <a class="title" href='/detailproject.html'>${project.name}</a>
-        <p class="duration">Durasi : ${project.startDate} - ${
-      project.endDate
-    }</p>
-        <p class="description">${project.description}</p>
-        <div class="tech-list">
-            ${
-              project.tech.nodejs
-                ? '<i class="fa-brands fa-xl fa-node"></i>'
-                : ""
-            }
-            ${
-              project.tech.vuejs
-                ? '<i class="fa-brands fa-xl fa-vuejs"></i>'
-                : ""
-            }
-            ${
-              project.tech.reactjs
-                ? '<i class="fa-brands fa-xl fa-react"></i>'
-                : ""
-            }
-            ${project.tech.php ? '<i class="fa-brands fa-xl fa-php"></i>' : ""}
+      <div class=" bg-white drop-shadow-lg rounded p-3">
+        <img class="rounded-xl object-cover" src="${project.uploadImage}" alt="project-image" />
+        <a href="/detail" class="mt-2 font-bold text-lg">${project.name}</a>
+        <p class="text-gray-600">Durasi : ${getTimeDifferences(project.startDate, project.endDate)}</p>
+        <p class="mb-7 mt-5 font-semibold">${project.description}</p>
+        <div class="flex items-center gap-5">
+        ${project.tech.nodejs ? '<i class="fa-brands fa-2xl fa-node"></i>' : ''}
+        ${project.tech.vuejs ? '<i class="fa-brands fa-2xl fa-vuejs"></i>' : ''}
+        ${project.tech.reactjs ? '<i class="fa-brands fa-2xl fa-react"></i>' : ''}
+        ${project.tech.php ? '<i class="fa-brands fa-2xl fa-php"></i>' : ''}
         </div>
-        <div class="option">
-          <button>edit</button>
-          <button>delete</button>
+        <div class="mt-8 flex justify-between gap-4">
+          <button class="w-full bg-black text-white rounded-lg py-1 font-semibold">edit</button>
+          <button class="w-full bg-black text-white rounded-lg py-1 font-semibold">delete</button>
         </div>
       </div>
         `;
   }
 }
+
+const getTimeDifferences = (start, end) => {
+  let timeDifferent = new Date(end) - new Date(start);
+
+  let monthDistance = Math.floor(timeDifferent / (30 * 24 * 60 * 60 * 1000));
+  let weekDistance = Math.floor(timeDifferent / (7 * 24 * 60 * 60 * 1000));
+  let dayDistance = Math.floor(timeDifferent / (24 * 60 * 60 * 1000));
+
+  if (monthDistance > 0) return `${monthDistance} month`;
+  if (weekDistance > 0) return `${weekDistance} week`;
+  if (dayDistance > 0) return `${dayDistance} day`;
+  return "Cannot count time";
+};

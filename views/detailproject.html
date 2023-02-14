@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>{{.Data.Title}}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-300">
+    <nav
+      class="flex justify-between items-center bg-gray-200 py-3 px-4 lg:px-10"
+    >
+      <div class="flex items-center">
+        <img src="/public/images/logo.png" alt="logo" />
+        <ul class="flex ml-7 gap-3 lg:gap-7">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          {{ if .Data.IsLogin }}
+            <li>
+              <a href="/myproject">Add Project</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="flex items-center gap-10 justify-around">
+        {{ if .Data.IsLogin }}
+          <p>Hello, {{ .Data.Name }}</p>
+          <a href="/logout" class="hover:scale-105 hover:font-semibold"
+            >Logout</a
+          >
+          {{ else }}
+          <a href="/register" class="hover:scale-105 hover:font-semibold"
+            >Register</a
+          >
+          <a href="/login" class="hover:scale-105 hover:font-semibold"
+            >Login</a
+          >
+        {{ end }}
+        <a href="/contactme" class="bg-black text-white p-2 rounded-md"
+          >Contact Me</a
+        >
+      </div>
+    </nav>
+    <div class="mx-auto p-6">
+      <h1 class="text-center text-2xl font-bold py-5">{{.Project.Name}}</h1>
+      <div class="flex flex-col gap-4 md:flex-row">
+        <img class="h-72 lg:h-96 object-cover" src="/uploads/{{.Project.Image}}" alt="pic" />
+        <div class="md:ml-5">
+          <p class="font-semibold text-lg lg:text-xl">Duration</p>
+          <div class="flex items-center gap-3 mt-4">
+            <i class="fa-regular fa-calendar-days"></i>
+            <p>{{.Project.StartDateFormat}} - {{.Project.EndDateFormat}}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fa-regular fa-clock"></i>
+            <p>{{.Project.Duration}}</p>
+          </div>
+          <div class="mt-4">
+            <p class="font-semibold text-lg lg:text-xl md:mt-10">Technologies</p>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              {{ range $i, $tech := .Project.Tech }}
+                <div class="flex items-center gap-2">
+                  <i class="w-10 fa-brands fa-2xl fa-{{$tech}}"></i>
+                  <p class="capitalize">{{$tech}}</p>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-justify mt-5">
+        <p>{{.Project.Description}}</p>
+      </div>
+    </div>
+  </body>
+</html>

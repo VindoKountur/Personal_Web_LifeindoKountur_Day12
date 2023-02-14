@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <title>{{.Data.Title}}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-300">
+    <nav
+      class="flex justify-between items-center bg-gray-200 py-3 px-4 lg:px-10"
+    >
+      <div class="flex items-center">
+        <img src="/public/images/logo.png" alt="logo" />
+        <ul class="flex ml-7 gap-3 lg:gap-7">
+          <li>
+            <a class="text-orange-600 font-extrabold" href="/">Home</a>
+          </li>
+          {{ if .Data.IsLogin }}
+            <li>
+              <a href="/myproject">Add Project</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="flex items-center gap-10 justify-around">
+        {{ if .Data.IsLogin }}
+          <p>Hello, {{ .Data.Name }}</p>
+          <a href="/logout" class="hover:scale-105 hover:font-semibold"
+            >Logout</a
+          >
+          {{ else }}
+          <a href="/register" class="hover:scale-105 hover:font-semibold"
+            >Register</a
+          >
+          <a href="/login" class="hover:scale-105 hover:font-semibold"
+            >Login</a
+          >
+        {{ end }}
+        <a href="/contactme" class="bg-black text-white p-2 rounded-md"
+          >Contact Me</a
+        >
+      </div>
+    </nav>
+    <section>
+      <div class="bg-white m-4 lg:m-10 rounded-lg p-2 lg:p-10 lg:flex">
+        <div class="lg:w-2/3 p-6">
+          <h1 class="font-bold text-2xl lg:text-3xl">Hi Welcome to my hut</h1>
+          <p class="mt-5 text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit,
+            maiores ab aliquam porro magni ratione praesentium officia aliquid
+            hic commodi, fuga iusto? Consequuntur facilis praesentium nostrum
+            repellat minima eum reiciendis nam, quos quidem, obcaecati
+            reprehenderit illum cumque asperiores, aliquid quia! Laborum
+            molestiae officia ipsam impedit quis, tenetur explicabo nulla
+            voluptatem.
+          </p>
+          <div class="mt-5 flex gap-5 items-center">
+            <a
+              class="bg-black text-white px-3 py-1 rounded-2xl"
+              href="https://github.com/VindoKountur"
+            >
+              contact
+            </a>
+            <div>
+              <a href="#">
+                Dowload CV
+                <i class="fa-solid fa-download"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="mt-10 flex justify-around lg:justify-start md:px-24 lg:px-0 lg:gap-14"
+          >
+            <a href="https://www.linkedin.com/in/lifeindo-kountur/" target="_blank" style="text-decoration: none">
+              <i class="fa-brands fa-2xl fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/vindo._.k/" target="_blank" style="text-decoration: none">
+              <i class="fa-brands fa-2xl fa-square-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/lifeindokountur/" target="_blank" style="text-decoration: none">
+              <i class="fa-brands fa-2xl fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com/#" target="_blank" style="text-decoration: none">
+              <i class="fa-brands fa-2xl fa-square-twitter"></i>
+            </a>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/3 p-6 flex justify-center">
+          <div
+            class="drop-shadow-lg bg-white rounded-b-lg hover:drop-shadow-2xl"
+          >
+            <img
+              src="/public/images/foto.jpg"
+              alt="man"
+              class="h-96 rounded-t-lg"
+            />
+            <div class="p-4 text-center">
+              <p class="text-2xl font-bold">Lifeindo Kountur</p>
+              <p class="text-lg font-semibold">Fullstack Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-200">
+        <h1 class="text-center font-bold text-3xl py-5">MY PROJECT</h1>
+        <div class="p-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:mx-20" id="project-list-container">
+          {{ if not .Projects }}
+            <div class="bg-white drop-shadow-lg rounded p-3 flex flex-col col-span-3">
+              <p class="text-center">There's no project here, <a class="bg-gray-700 rounded px-2 py-1 text-white" href="/myproject">add more</a></p>
+            </div>
+          {{ else }}
+            {{ range $index, $project := .Projects }}
+            <div class="bg-white drop-shadow-lg rounded p-3 flex flex-col">
+              <img class="rounded-xl object-cover" src="/uploads/{{$project.Image}}" alt="project-image" />
+              <a href="/detail/{{$project.Id}}" class="mt-2 font-bold text-lg">{{$project.Name}}</a>
+              <p class="text-gray-600">Durasi : {{$project.Duration}}</p>
+              <p class="mb-7 mt-5 font-semibold flex-1">{{$project.Description}}</p>
+              <div class="flex items-center gap-5">
+                {{ range $i, $tech := $project.Tech }}
+                  <i class="fa-brands fa-2xl fa-{{$tech}}"></i>
+                {{ end }}
+              </div>
+              <div class="mt-8 flex justify-between gap-4">
+                {{ if $.Data.IsLogin }}
+                  <a href="/editproject/{{$project.Id}}" class="w-full bg-black text-center text-white rounded-lg py-1 font-semibold">edit</a>
+                  <a href="/deleteproject/{{$project.Id}}" class="w-full bg-black text-center text-white rounded-lg py-1 font-semibold">delete</a>
+                {{ end }}
+              </div>
+            </div>
+            {{ end }}
+          {{ end }}
+          
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="/public/js/script.js"></script>
+</html>
